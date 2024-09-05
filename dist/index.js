@@ -1116,14 +1116,7 @@ function getVsTestPath() {
     if (vstestLocationMethod && vstestLocationMethod.toUpperCase() === "LOCATION") {
         return core.getInput('vstestLocation');
     }
-    let vsTestVersion = core.getInput('vsTestVersion');
-    if (vsTestVersion && vsTestVersion === "14.0") {
-        return path.join(__dirname, 'win-x64/VsTest/v140/vstest.console.exe');
-    }
-    if (vsTestVersion && vsTestVersion === "15.0") {
-        return path.join(__dirname, 'win-x64/VsTest/v150/Common7/IDE/Extensions/TestPlatform/vstest.console.exe');
-    }
-    return path.join(__dirname, 'win-x64/VsTest/v160/Common7/IDE/Extensions/TestPlatform/vstest.console.exe');
+    return path.join(__dirname, 'TestPlatform/vstest.console.exe');
 }
 exports.getVsTestPath = getVsTestPath;
 
@@ -4853,9 +4846,8 @@ function run() {
             testFiles.forEach(function (file) {
                 core.debug(`${file}`);
             });
-            core.info(`Downloading test tools...`);
+            core.info(`Using pre-existing test tools...`);
             let workerZipPath = path.join(__dirname, 'win-x64.zip');
-            yield exec.exec(`powershell Invoke-WebRequest -Uri "https://aka.ms/local-worker-win-x64" -OutFile ${workerZipPath}`);
             core.info(`Unzipping test tools...`);
             core.debug(`workerZipPath is ${workerZipPath}`);
             yield exec.exec(`powershell Expand-Archive -Path ${workerZipPath} -DestinationPath ${__dirname}`);
