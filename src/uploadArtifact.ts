@@ -44,30 +44,30 @@ export async function uploadArtifact() {
         )
       }
 
-      const artifactClient = create()
-      const options: UploadOptions = {
-        continueOnError: false
-      }
-      if (inputs.retentionDays) {
-        options.retentionDays = inputs.retentionDays
-      }
+      //const artifactClient = create()
+      // const options: UploadOptions = {
+      //   continueOnError: false
+      // }
+      // if (inputs.retentionDays) {
+      //   options.retentionDays = inputs.retentionDays
+      // }
 
-      const uploadResponse = await artifactClient.uploadArtifact(
-        inputs.artifactName,
-        searchResult.filesToUpload,
-        searchResult.rootDirectory,
-        options
-      )
+      // const uploadResponse = await artifactClient.uploadArtifact(
+      //   inputs.artifactName,
+      //   searchResult.filesToUpload,
+      //   searchResult.rootDirectory,
+      //   options
+      // )
 
-      if (uploadResponse.failedItems.length > 0) {
-        core.setFailed(
-          `An error was encountered when uploading ${uploadResponse.artifactName}. There were ${uploadResponse.failedItems.length} items that failed to upload.`
-        )
-      } else {
-        core.info(
-          `Artifact ${uploadResponse.artifactName} has been successfully uploaded!`
-        )
-      }
+      // if (uploadResponse.failedItems.length > 0) {
+      //   core.setFailed(
+      //     `An error was encountered when uploading ${uploadResponse.artifactName}. There were ${uploadResponse.failedItems.length} items that failed to upload.`
+      //   )
+      // } else {
+      //   core.info(
+      //     `Artifact ${uploadResponse.artifactName} has been successfully uploaded!`
+      //   )
+      // }
     }
   } catch (err) {
     core.setFailed(err.message)
